@@ -1,28 +1,30 @@
 package binarySearchQuickSort;
 
 public class QuickSort {
-    static void qs(int[] array, int s, int end) {// быстрая сортировка static чтобы не создавать объект в main-е
-        if (s >= end) {
+    public static void qs(int array[], int start, int end) {// быстрая сортировка static чтобы не создавать объект в main-е
+        if (start >= end) { // если в масииве только 1 ячейка останавливаем процесс
             return;
         }
-        int index = sort(array, s, end);
-        qs(array, s, index - 1);
-        qs(array, index + 1, end);
+        int indexP = partition(array, start, end); // индекс опорной точки
+        qs(array, start, indexP - 1); // рекурсивно сортируем левую часть
+        qs(array, indexP + 1, end);  // рекурсивно сортируем правую часть
     }
 
-    static int sort(int[] array, int s, int end) {
-        int op = array[end];
-        int p = s;
-        for (int i = s; i < end; i++) {
-            if (array[i] < op) {
-                int tepm = array[i];
-                array[i] = array[p];
-                array[p] = tepm;
-                p++;
+    public static int partition(int array[], int start, int end) {
+        int value = array[end]; // значение опорной точки
+        int position = start;
+
+        for (int i = start; i < end; i++) { // проходимся по всем элементам массива
+            if (array[i] < value) { //
+
+                int temp = array[i]; // временно передаем найденное меньшее значение эелемента
+                array[i] = array[position]; // на освободившееся место передаем значение которое по индексу позиции
+                array[position] = temp; // после на данную позицию переставляем значение ранее переданное в temp)
+                position++; // инкремент для дальнейшего поиска
             }
         }
-        array[end] = array[p];
-        array[p] = op;
-        return p;
+        array[end] = array[position]; // значение по индексу позиции передаем на концец массива
+        array[position] = value; // значение опорного элемента передаем в освободивуюся позициию
+        return position; // индекс опорной позиции
     }
 }
