@@ -5,11 +5,10 @@ import java.util.Comparator;
 public class Mileage implements Comparator<Car> {
     @Override
     public int compare(Car o1, Car o2) {
-        //int sortL=0;
         if (Car.num == 1) {
             return (o1.getMileage() > o2.getMileage() ? 1 : -1);
-        } else {
+        } else if (Car.num == 2) {
             return (o1.getMileage() < o2.getMileage() ? 1 : -1);
-        }
+        } else return 0;
     }
 }
